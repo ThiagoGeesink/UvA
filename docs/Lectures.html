@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Lectures</title>
+
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">UvA</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="Exercises.html">Exercises</a>
+</li>
+<li>
+  <a href="Lectures.html">Lectures</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Lectures</h1>
+
+</div>
+
+
+<div id="reading-datasets" class="section level1">
+<h1>Reading Datasets</h1>
+<pre class="r"><code>Data = read.table(&quot;telecom.txt&quot;, 
+                  header = TRUE, 
+                  sep = &quot;,&quot;)
+Data</code></pre>
+<pre><code>##    customerID MonthlyCharges TotalCharges    PaymentMethod Churn
+## 1  7590-VHVEG          29.85        109.9 Electronic check   yes
+## 2  5575-GNVDE          56.95           na     Mailed check   yes
+## 3  3668-QPYBK             NA       108.15               --   yes
+## 4  7795-CFOCW          42.30      1840.75    Bank transfer    no
+## 5  9237-HQITU          70.70         &lt;NA&gt; Electronic check    no
+## 6  9305-CDSKC            NaN        820.5               --   yes
+## 7  1452-KIOVK          89.10       1949.4      Credit card    no
+## 8  6713-OKOMC             NA          N/A                    yes
+## 9  7892-POOKP         104.80      3046.05 Electronic check    no
+## 10 8451-AJOMK          54.10       354.95 Electronic check    no</code></pre>
+</div>
+<div id="missing-values" class="section level1">
+<h1>Missing Values</h1>
+<div id="scanning-for-missing-values" class="section level2">
+<h2>Scanning for Missing Values</h2>
+<pre class="r"><code>is.na(Data$MonthlyCharges)</code></pre>
+<pre><code>##  [1] FALSE FALSE  TRUE FALSE FALSE  TRUE FALSE  TRUE FALSE FALSE</code></pre>
+<pre class="r"><code>which(is.na(Data$MonthlyCharges))</code></pre>
+<pre><code>## [1] 3 6 8</code></pre>
+</div>
+<div id="replace-alternative-indicators-for-missing-values-by-na"
+class="section level2">
+<h2>Replace Alternative Indicators for Missing Values By NA</h2>
+<pre class="r"><code>Data = read.table(&quot;telecom.txt&quot;, 
+                  header = TRUE, 
+                  sep = &quot;,&quot;, 
+                  na.strings = c(&quot;na&quot;, &quot;N/A&quot;, &quot;NA&quot;))
+Data</code></pre>
+<pre><code>##    customerID MonthlyCharges TotalCharges    PaymentMethod Churn
+## 1  7590-VHVEG          29.85       109.90 Electronic check   yes
+## 2  5575-GNVDE          56.95           NA     Mailed check   yes
+## 3  3668-QPYBK             NA       108.15               --   yes
+## 4  7795-CFOCW          42.30      1840.75    Bank transfer    no
+## 5  9237-HQITU          70.70           NA Electronic check    no
+## 6  9305-CDSKC            NaN       820.50               --   yes
+## 7  1452-KIOVK          89.10      1949.40      Credit card    no
+## 8  6713-OKOMC             NA           NA                    yes
+## 9  7892-POOKP         104.80      3046.05 Electronic check    no
+## 10 8451-AJOMK          54.10       354.95 Electronic check    no</code></pre>
+</div>
+</div>
+<div id="how-to-handle-missing-values" class="section level1">
+<h1>How to handle missing values</h1>
+<div id="method-1" class="section level2">
+<h2>Method 1</h2>
+<p>Remove the missing values from the data. - Pro: The remaining data
+set is not transformed. - Con: If there are many missing values, the
+remaining data set has a significantly smaller size, which affects the
+reliability of future estimates.</p>
+<p>We test the effect of removing missing values from the data set by
+creating a toy example with simulated data.</p>
+<div id="create-the-original-dataset" class="section level3">
+<h3>Create The Original Dataset</h3>
+<pre class="r"><code>Data = rnorm(1000, 
+             mean=100, 
+             sd=25)
+mean(Data)</code></pre>
+<pre><code>## [1] 98.90773</code></pre>
+</div>
+<div id="create-a-data-set-with-200-missing-values"
+class="section level3">
+<h3>Create A Data Set With 200 Missing Values</h3>
+<pre class="r"><code>Data.missing = Data
+Data.missing[sample(1000,200)]=NA
+summary(Data.missing)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
+##   24.24   81.93   99.66   99.28  116.80  168.50     200</code></pre>
+</div>
+<div id="create-a-new-data-set-by-removing-the-missing-values"
+class="section level3">
+<h3>create a new data set by removing the missing values</h3>
+<pre class="r"><code>Data.Remove = Data.missing[- which(is.na(Data.missing))]
+summary(Data.Remove)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   24.24   81.93   99.66   99.28  116.80  168.50</code></pre>
+</div>
+</div>
+<div id="method-2" class="section level2">
+<h2>Method 2</h2>
+<p>Drawback of method 2: The variance of the ‘cleaned’ data set is
+smaller than the original variance. Smaller variance for a variable =
+the variable is ‘more predictable’. The effect is more pronounced when
+there are many missing values.</p>
+<div id="replace-the-missing-values-by-the-empirical-mean"
+class="section level3">
+<h3>Replace the missing values by the empirical mean</h3>
+<pre class="r"><code>Data.Replace = replace(Data.missing, 
+                       which(is.na(Data.missing)), 
+                       mean(Data.missing[- which(is.na(Data.missing))]))</code></pre>
+</div>
+<div id="compare-the-standard-deviations" class="section level3">
+<h3>Compare the standard deviations</h3>
+<pre class="r"><code>sd(Data)</code></pre>
+<pre><code>## [1] 25.52277</code></pre>
+<pre class="r"><code>sd(Data.Replace)</code></pre>
+<pre><code>## [1] 22.85012</code></pre>
+</div>
+</div>
+<div id="method-3" class="section level2">
+<h2>Method 3</h2>
+<p>The standard deviation of X is not affected a lot. However: We
+changed values in the X variable, indepedently from the Y variable. ###
+Create a data set with 2 variables: X and Y.</p>
+<pre class="r"><code>set.seed(100)
+x = rnorm(1000, 
+          mean = 100,
+          sd = 25)
+y = (5+rnorm(1000,0,0.2))*x + rnorm(1000,0,1)
+Data = matrix(c(x,y),
+              1000,
+              2)</code></pre>
+<div id="the-first-variable-x-is-containing-missing-values."
+class="section level3">
+<h3>The first variable (X) is containing missing values.</h3>
+<pre class="r"><code>Data.missing = Data
+Data.missing[sample(1000,200),1] = NA</code></pre>
+</div>
+<div
+id="replace-missing-values-by-a-randomly-generated-number-from-the-available-x-values."
+class="section level3">
+<h3>Replace missing values by a randomly generated number from the
+available X values.</h3>
+<pre class="r"><code>Values.x = Data.missing[- which(is.na(Data.missing[,1])),1]
+Data.Replace.x = replace(Data.missing[,1],
+                         is.na(Data.missing[,1]),
+                         sample(Values.x,200))
+sd(Data.Replace.x)</code></pre>
+<pre><code>## [1] 25.56458</code></pre>
+<pre class="r"><code>sd(Data[,1])</code></pre>
+<pre><code>## [1] 25.7647</code></pre>
+</div>
+</div>
+<div id="conclusions" class="section level2">
+<h2>Conclusions</h2>
+<p>Method 1 + 2 work will if the number of missing values is small,
+compared to the sample size. If there are many missing values, removing
+or replacing them can have significant impact on your results! Replacing
+values in one variables may cause inconsistencies with the remaining
+variables.</p>
+</div>
+</div>
+<div id="outliers" class="section level1">
+<h1>Outliers</h1>
+<div id="visualizing-patterns-in-data" class="section level2">
+<h2>Visualizing patterns in data</h2>
+<div id="draw-a-histogram-in-r-and-add-the-normal-density"
+class="section level3">
+<h3>Draw a histogram in R and add the normal density</h3>
+<pre class="r"><code>Data = rnorm(500)
+hist(Data,
+     50, 
+     freq=FALSE,
+     main= &quot;Histogram and the standard normal density&quot;)
+lines(seq(-4,4,0.1), 
+      dnorm(seq(-4,4,0.1)),
+      col=&quot;blue&quot;, lwd=2)</code></pre>
+<p><img src="Lectures_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+</div>
+<div id="extreme-points" class="section level3">
+<h3>Extreme Points</h3>
+<p>Observations that do not follow the pattern of the majority of the
+data.</p>
+</div>
+<div
+id="in-data-science-we-are-looking-for-new-and-surprising-patterns-in-the-data."
+class="section level3">
+<h3>In data science, we are looking for (new and surprising) patterns in
+the data.</h3>
+<p>Extreme points can severely influence the patterns that can be found
+in the data.</p>
+</div>
+<div id="the-data-pre-processing-part-has-to" class="section level3">
+<h3>The data pre-processing part has to</h3>
+<ol style="list-style-type: decimal">
+<li>identify the extreme points in the data set,</li>
+<li>determine a strategy on how to handle extreme points.</li>
+</ol>
+</div>
+</div>
+<div id="finding-extreme-observations-example-1" class="section level2">
+<h2>Finding extreme observations: Example 1</h2>
+<pre class="r"><code>boxplot(Data)</code></pre>
+<p><img src="Lectures_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<pre class="r"><code>hist(Data)</code></pre>
+<p><img src="Lectures_files/figure-html/unnamed-chunk-13-2.png" width="672" /></p>
+<div id="the-outlier-could-be-detected-by-studying-the-histogram."
+class="section level3">
+<h3>The outlier could be detected by studying the histogram.</h3>
+<ul>
+<li>A histogram shows one variable (e.g. x or y).</li>
+<li>A histogram can detect an observation that deviates in one
+direction. ### In two (or more) dimensions, a scatterplot can be used to
+reveal patterns between variables.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="basic-linear-regression" class="section level1">
+<h1>Basic Linear Regression</h1>
+<div id="outliers-and-high-leverage-points" class="section level2">
+<h2>Outliers and high-leverage points</h2>
+<div id="extreme-points-1" class="section level3">
+<h3>Extreme points</h3>
+<ul>
+<li>Outlier: unusual observations in the y direction.</li>
+<li>High leverage point: unusual observation in the x direction. ###
+What should we do with outliers and high leverage points?</li>
+<li>Investigate the sensitivity of the model on the extreme
+observations;</li>
+<li>Decide to leave the outlier in the data set; 1. the observation
+actually happened; 2. and provides important information for the
+predictions;</li>
+<li>or remove the outlier from the data set: 1. the outlier is a wrong
+observation; 2. the outlier is not important for our particular
+study.</li>
+</ul>
+</div>
+<div id="creating-a-data-set-with-outliers-and-leverage-points"
+class="section level3">
+<h3>Creating a data set with outliers and leverage points:</h3>
+<pre class="r"><code>x1=c(1.5, 1.7, 2, 2.2,2.5,2.5,2.7,2.9,3.0, 3.5,
+    3.8,4.2,4.3,4.6, 4, 5.1,5.1,5.2,5.5)
+y1=c(3,2.5, 3.5, 3.0, 3.1, 3.6, 3.2, 3.9, 4, 4,
+    4.2, 4.1, 4.8, 4.2, 5.1, 5.1, 5.1, 4.8,5.3)
+Ax=c(3.4)
+Ay=c(8)
+Bx=c(9.5)
+By=c(8)
+Cx=c(9.5)
+Cy=(2.5)
+
+plot(c(Ax,Bx,Cx), c(Ay,By,Cy),xlim=c(0,10),ylim=c(0,10), xlab=&quot;x-values&quot;, ylab=&quot;y-values&quot;)
+text(c(Ax,Bx,Cx), c(Ay,By,Cy)-0.5, c(&quot;A&quot;,&quot;B&quot;,&quot;C&quot;))
+points(x1,y1)</code></pre>
+<p><img src="Lectures_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+</div>
+<div id="the-data-set" class="section level3">
+<h3>The data set</h3>
+<ul>
+<li>19 basis points;</li>
+<li>outlier: A;</li>
+<li>high leverage point C;</li>
+<li>outlier &amp; high leverage point: B.</li>
+</ul>
+</div>
+<div id="we-apply-linear-regression-model-in-3-different-situations"
+class="section level3">
+<h3>We apply linear regression model in 3 different situations:</h3>
+<ul>
+<li>only the 19 basis points;</li>
+<li>the 19 basis points + the outlier A;</li>
+<li>the 19 + basis points + outlier/high leverage point B.</li>
+<li>the 19 basis points + the high leverage point C</li>
+</ul>
+<pre class="r"><code>Outliers.full.lm=lm(y~x)
+summary(Outliers.full.lm)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = y ~ x)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -100.720  -13.164   -0.115   12.737   80.962 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  0.19707    2.63711   0.075     0.94    
+## x            4.99943    0.02544 196.536   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 20.72 on 998 degrees of freedom
+## Multiple R-squared:  0.9748, Adjusted R-squared:  0.9748 
+## F-statistic: 3.863e+04 on 1 and 998 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>Outliers.basis.lm=lm(y1~x1)
+summary(Outliers.basis.lm)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = y1 ~ x1)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.50425 -0.29640  0.04634  0.21085  0.76203 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   1.8961     0.2321   8.168 2.75e-07 ***
+## x1            0.6105     0.0627   9.737 2.29e-08 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.3383 on 17 degrees of freedom
+## Multiple R-squared:  0.8479, Adjusted R-squared:  0.839 
+## F-statistic:  94.8 on 1 and 17 DF,  p-value: 2.286e-08</code></pre>
+<pre class="r"><code>Outliers.A.lm=lm(c(y1,Ay)~c(x1,Ax))
+summary(Outliers.A.lm)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = c(y1, Ay) ~ c(x1, Ax))
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -0.6926 -0.4756 -0.1116  0.0353  3.8259 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept)   2.1385     0.6711   3.187  0.00511 **
+## c(x1, Ax)     0.5987     0.1820   3.290  0.00407 **
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.982 on 18 degrees of freedom
+## Multiple R-squared:  0.3756, Adjusted R-squared:  0.3409 
+## F-statistic: 10.83 on 1 and 18 DF,  p-value: 0.004067</code></pre>
+<pre class="r"><code>Outliers.B.lm=lm(c(y1,By)~c(x1,Bx))
+summary(Outliers.B.lm)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = c(y1, By) ~ c(x1, Bx))
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.54167 -0.30771  0.01182  0.23746  0.74105 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  1.80748    0.17465   10.35 5.25e-09 ***
+## c(x1, Bx)    0.63787    0.04171   15.29 9.31e-12 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.3322 on 18 degrees of freedom
+## Multiple R-squared:  0.9285, Adjusted R-squared:  0.9246 
+## F-statistic: 233.9 on 1 and 18 DF,  p-value: 9.309e-12</code></pre>
+<pre class="r"><code>Outliers.C.lm=lm(c(y1,Cy)~c(x1,Cx))
+summary(Outliers.C.lm)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = c(y1, Cy) ~ c(x1, Cx))
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2.26548 -0.60148  0.09143  0.68076  1.12001 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   3.4087     0.4590   7.427 6.94e-07 ***
+## c(x1, Cx)     0.1428     0.1096   1.303    0.209    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.8729 on 18 degrees of freedom
+## Multiple R-squared:  0.0862, Adjusted R-squared:  0.03544 
+## F-statistic: 1.698 on 1 and 18 DF,  p-value: 0.209</code></pre>
+<pre class="r"><code>plot(c(Ax,Bx,Cx), c(Ay,By,Cy),xlim=c(-2,10),ylim=c(-2,10), xlab=&quot;x-values&quot;, ylab=&quot;y-values&quot;)
+text(c(Ax,Bx,Cx), c(Ay,By,Cy)-0.3, c(&quot;A&quot;,&quot;B&quot;,&quot;C&quot;))
+points(x1,y1)
+abline(Outliers.basis.lm,col=&quot;red&quot;,lwd=2)
+abline(Outliers.A.lm,col=&quot;blue&quot;,lwd=2)
+abline(Outliers.B.lm,col=&quot;black&quot;,lwd=2)
+abline(Outliers.C.lm,col=&quot;green&quot;,lwd=2)
+legend(&quot;bottomright&quot;, c(&quot;19 basis points&quot;, &quot; with A&quot;, &quot;with B&quot;, &quot;with C&quot;), col=c(&quot;red&quot;, &quot;blue&quot;, &quot;black&quot;, &quot;green&quot;), lty=c(1,1,1,1))</code></pre>
+<p><img src="Lectures_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+# Summarizing a Data Set ## Measures for the location of a data set:
+normal and lognormal distribution</p>
+<pre class="r"><code>par(mfrow=c(1,2))
+X.Normal=rnorm(1000)
+hist(X.Normal,30, main=&quot;Normal distribution&quot;, xlab=&quot;x&quot;)
+abline(v=quantile(X.Normal,0.25), col=&quot;red&quot;, lwd=2)
+abline(v=quantile(X.Normal,0.75), col=&quot;red&quot;, lwd=2)
+abline(v=mean(X.Normal), col=&quot;blue&quot;, lwd=2)
+
+X.LogNormal=exp(rnorm(1000))
+hist(X.LogNormal,30, main=&quot;Lognormal distribution&quot;, xlab=&quot;x&quot;)
+abline(v=quantile(X.LogNormal,0.25), col=&quot;red&quot;, lwd=2)
+abline(v=quantile(X.LogNormal,0.75), col=&quot;red&quot;, lwd=2)
+abline(v=mean(X.LogNormal), col=&quot;blue&quot;, lwd=2)</code></pre>
+<p><img src="Lectures_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+</div>
+</div>
+<div
+id="measures-for-the-center-and-spread-of-a-data-set-example-car-data-set"
+class="section level2">
+<h2>Measures for the center and spread of a data set: Example car data
+set</h2>
+<div id="load-the-data" class="section level3">
+<h3>Load the Data</h3>
+<pre class="r"><code>dtData = readRDS(&#39;dtData1.rds&#39;)
+head(dtData)</code></pre>
+<pre><code>##   Age Gender Region Mileage Expo Color  Speed  Urban Claims
+## 1  60      F      2   66932    1  blue 0.0665 0.2167      0
+## 2  29      F      2   73835    1 white 0.0610 0.5520      0
+## 3  50      M      1   82826    1  gray 0.1152 0.0292      0
+## 4  87      M      2   99446    1 white 0.1947 0.6425      1
+## 5  68      M      2  123225    1  gray 0.2049 0.5588      0
+## 6  51      F      1  205425    1 black 0.0315 0.0565      0</code></pre>
+<pre class="r"><code>summary(dtData)</code></pre>
+<pre><code>##       Age       Gender       Region         Mileage            Expo  
+##  Min.   :20.0   F:1580   Min.   :1.000   Min.   : 25704   Min.   :1  
+##  1st Qu.:34.0   M:2479   1st Qu.:2.000   1st Qu.: 69734   1st Qu.:1  
+##  Median :44.0            Median :2.000   Median : 92389   Median :1  
+##  Mean   :46.5            Mean   :1.949   Mean   : 98477   Mean   :1  
+##  3rd Qu.:57.0            3rd Qu.:2.000   3rd Qu.:122412   3rd Qu.:1  
+##  Max.   :90.0            Max.   :3.000   Max.   :231584   Max.   :1  
+##    Color         Speed             Urban            Claims      
+##  black:899   Min.   :0.00090   Min.   :0.0002   Min.   :0.0000  
+##  blue :929   1st Qu.:0.07795   1st Qu.:0.2673   1st Qu.:0.0000  
+##  gray :962   Median :0.11890   Median :0.4815   Median :0.0000  
+##  red  :663   Mean   :0.12168   Mean   :0.4861   Mean   :0.1619  
+##  white:606   3rd Qu.:0.16190   3rd Qu.:0.7096   3rd Qu.:0.0000  
+##              Max.   :0.29980   Max.   :0.9979   Max.   :3.0000</code></pre>
+<ul>
+<li>Each line corresponds with a policyholder in a car insurance
+portfolio.</li>
+<li>The last column Claims contains the number of claims of a
+policyholder.</li>
+<li>Expo is the exposure, which is the time interval in which we measure
+the number of claims. ### This data set can be used to understand the
+characteristics of a policyholder that may influence the number of
+claims.</li>
+</ul>
+</div>
+<div
+id="the-summary-provides-an-overview-about-the-center-and-the-spread-of-the-variables-in-the-data-set."
+class="section level3">
+<h3>The summary provides an overview about the center and the spread of
+the variables in the data set.</h3>
+<ul>
+<li>For variables such as Region and Color, the summary is not
+meaningful since these are qualitative variables.</li>
+<li>The variable Claims is a quantitative variable, but the summary is
+not useful because the data is discrete.</li>
+</ul>
+<pre class="r"><code>library(ggplot2)
+P = ggplot(data = dtData, mapping = (aes(x = Mileage)))
+P</code></pre>
+<p><img src="Lectures_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<ul>
+<li>We created the Base layer for the plot.</li>
+<li>We have to add layers to this base layer where each layer adds
+something to the plot.</li>
+</ul>
+<pre class="r"><code>P+geom_histogram(bins=20, color=&quot;black&quot;,fill=&quot;grey&quot;)</code></pre>
+<p><img src="Lectures_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<pre class="r"><code>P+geom_histogram(bins=20, color=&quot;black&quot;,fill=&quot;grey&quot;)+
+       geom_vline(aes(xintercept=mean(Mileage)),
+                 color=&quot;blue&quot;, linetype=&quot;dashed&quot;, size=1) +
+       geom_vline(aes(xintercept=quantile(Mileage, 0.25)),
+                  color=&quot;red&quot;, linetype=&quot;dashed&quot;, size=1) +
+       geom_vline(aes(xintercept=quantile(Mileage, 0.75)),
+                  color=&quot;red&quot;, linetype=&quot;dashed&quot;, size=1) + 
+  ggtitle(&quot;Histogram of the variable Mileage&quot;)</code></pre>
+<p><img src="Lectures_files/figure-html/unnamed-chunk-19-2.png" width="672" /></p>
+</div>
+</div>
+</div>
+<div id="data-transformation" class="section level1">
+<h1>Data Transformation</h1>
+<div id="rescaling-and-normalization-illustration-with-clusters"
+class="section level2">
+<h2>Rescaling and normalization: Illustration with clusters</h2>
+<div id="example-clusters-with-non-normalized-data"
+class="section level3">
+<h3>Example: Clusters with non-normalized data</h3>
+<pre class="r"><code>X1=c(rnorm(50,50,100), rnorm(50,200,100))
+X2=c(rnorm(50,0.1,0.1), rnorm(50, 0.8,0.1))
+par(mfrow=c(1,2))
+plot(X1,X2, pch=20,lwd=5,col=&quot;blue&quot;, main=&quot;Data set (non-standardized)&quot;)
+Data=matrix(c(X1,X2),ncol = 2, byrow = FALSE)
+fit &lt;- kmeans(Data, 2)
+fit</code></pre>
+<pre><code>## K-means clustering with 2 clusters of sizes 54, 46
+## 
+## Cluster means:
+##        [,1]      [,2]
+## 1 236.41091 0.6513657
+## 2  21.88267 0.2594290
+## 
+## Clustering vector:
+##   [1] 1 2 2 2 2 1 2 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 2 1 1 1 2 2 2 2 1 2 2 2 1
+##  [38] 2 2 2 2 2 2 1 2 2 1 1 1 2 1 2 1 2 1 1 2 2 2 1 1 1 1 1 1 1 1 2 1 1 1 1 1 1
+##  [75] 1 1 1 1 1 1 1 2 1 1 1 1 1 2 1 1 1 1 1 1 1 1 2 1 1 1
+## 
+## Within cluster sum of squares by cluster:
+## [1] 268967.2 198702.5
+##  (between_SS / total_SS =  71.0 %)
+## 
+## Available components:
+## 
+## [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;     &quot;tot.withinss&quot;
+## [6] &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;         &quot;ifault&quot;</code></pre>
+<pre class="r"><code>plot(X1,X2,col=(1+fit$cluster), pch=20,lwd=5, main = &quot;Results after cluster analysis&quot;)</code></pre>
+<p><img src="Lectures_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+</div>
+<div id="standardize-with-z-scores" class="section level3">
+<h3>standardize with Z scores</h3>
+<pre class="r"><code>X1.Z=(X1-mean(X1))/sd(X1)
+X2.Z=(X2-mean(X2))/sd(X2)
+plot(X1.Z, X2.Z, pch=20,lwd=5,col=&quot;blue&quot;, main=&quot;Data set (standardized)&quot;)</code></pre>
+<p><img src="Lectures_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<pre class="r"><code>Data=matrix(c(X1.Z,X2.Z),ncol = 2, byrow = FALSE)
+fit &lt;- kmeans(Data, 2)
+fit</code></pre>
+<pre><code>## K-means clustering with 2 clusters of sizes 54, 46
+## 
+## Cluster means:
+##         [,1]       [,2]
+## 1 -0.6789581 -0.7741923
+## 2  0.7970378  0.9088344
+## 
+## Clustering vector:
+##   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+##  [38] 1 1 1 1 1 1 2 1 1 2 1 1 1 2 2 2 2 2 2 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+##  [75] 2 2 2 2 2 2 2 1 2 2 2 2 2 1 2 2 2 2 2 2 2 2 1 2 2 2
+## 
+## Within cluster sum of squares by cluster:
+## [1] 44.55693 28.96629
+##  (between_SS / total_SS =  62.9 %)
+## 
+## Available components:
+## 
+## [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;     &quot;tot.withinss&quot;
+## [6] &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;         &quot;ifault&quot;</code></pre>
+<pre class="r"><code>plot(X1.Z,X2.Z,col=(1+fit$cluster), pch=20,lwd=5,main = &quot;Results after cluster analysis&quot;)</code></pre>
+<p><img src="Lectures_files/figure-html/unnamed-chunk-21-2.png" width="672" /></p>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
