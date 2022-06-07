@@ -14,22 +14,22 @@ output:
 knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 ```
 
-## R Markdown
+# Introduction to Data Science: Data pre-processing Exercises Part 1
+1. Consider the following table summarizing different studies. Classify each variable as qualitative (qual) / quantitative (quant). Indicator also if it is a discrete or a continuous variable.
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+2. Explain why zip codes should be considered text variables rather than numeric.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+3. Consider a data set $X_1, X_2, \dots,X_{30}$ with 30 observations. Assume that each observation can be missing and assume that the probability that an observation is missing is 0.05. Moreover, missing values are spread evenly through the data and occur independently of each other. Denote by $D_i$ the random variable which takes value 1 if observation $i$ is missing and 0 otherwise. Show that the probability that the data set of 30 observations contains at least one missing value is close to 80%.
 
-```{r cars}
-summary(cars)
-```
+4. Consider $n_1 + m$ independent and identical random variables denoted by $X_1, X_2,\dots ,X_{n_1}$ and $X_{n_1+1},\dots,X_{n_1 + m}$. Denote by $S_1$ the random mean over the first $n_1$ random variables whereas $S_2$ denotes the random mean over all random variables:
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+$$S_1 = \frac{1}{n_1}\sum_{i=1}^{n_1}X_i,$$ 
+$$S_2 = \frac{1}{n_1 + m}\sum_{i=1}^{n_1 + m} X_i.$$
+Assume that the expectation of $X_1$ is $\mu$ and the variance is $\sigma^2$:
+$$\mathbb{E}[X_1] = \mu$$
+$$Var[X_1] = \sigma^2$$
+(a) Show that
+$$\mathbb{E}[S_1] = \mathbb{E}[S_2] = \mu$$
+(b) Show that
+$$\frac{Var[S_1]}{Var[S_2]} = 1 + \frac{m}{n_1}$$
+(c) Assume the $X_i$ is the $i$-th observation in our data set. Moreover, assume that the last $m$ observations have to be deleted because of missing values. Give an interpretation of the results in Question a and b

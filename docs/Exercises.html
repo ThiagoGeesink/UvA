@@ -347,32 +347,47 @@ div.tocify {
 </div>
 
 
-<div id="r-markdown" class="section level2">
-<h2>R Markdown</h2>
-<p>This is an R Markdown document. Markdown is a simple formatting
-syntax for authoring HTML, PDF, and MS Word documents. For more details
-on using R Markdown see <a href="http://rmarkdown.rstudio.com"
-class="uri">http://rmarkdown.rstudio.com</a>.</p>
-<p>When you click the <strong>Knit</strong> button a document will be
-generated that includes both content as well as the output of any
-embedded R code chunks within the document. You can embed an R code
-chunk like this:</p>
-<pre class="r"><code>summary(cars)</code></pre>
-<pre><code>##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00</code></pre>
-</div>
-<div id="including-plots" class="section level2">
-<h2>Including Plots</h2>
-<p>You can also embed plots, for example:</p>
-<p><img src="Exercises_files/figure-html/pressure-1.png" width="672" /></p>
-<p>Note that the <code>echo = FALSE</code> parameter was added to the
-code chunk to prevent printing of the R code that generated the
-plot.</p>
+<div
+id="introduction-to-data-science-data-pre-processing-exercises-part-1"
+class="section level1">
+<h1>Introduction to Data Science: Data pre-processing Exercises Part
+1</h1>
+<ol style="list-style-type: decimal">
+<li><p>Consider the following table summarizing different studies.
+Classify each variable as qualitative (qual) / quantitative (quant).
+Indicator also if it is a discrete or a continuous variable.</p></li>
+<li><p>Explain why zip codes should be considered text variables rather
+than numeric.</p></li>
+<li><p>Consider a data set <span class="math inline">\(X_1, X_2,
+\dots,X_30\)</span> with 30 observations. Assume that each observation
+can be missing and assume that the probability that an observation is
+missing is 0.05. Moreover, missing values are spread evenly through the
+data and occur independently of each other. Denote by <span
+class="math inline">\(D_i\)</span> the random variable which takes value
+1 if observation <span class="math inline">\(i\)</span> is missing and 0
+otherwise. Show that the probability that the data set of 30
+observations contains at least one missing value is close to
+80%.</p></li>
+<li><p>Consider <span class="math inline">\(n_1 + m\)</span> independent
+and identical random variables denoted by <span
+class="math inline">\(X_1, X_2,\dots ,X_{n_1}\)</span> and <span
+class="math inline">\(X_{n_1+1},\dots,X_{n_1 + m}\)</span>. Denote by
+<span class="math inline">\(S_1\)</span> the random mean over the first
+<span class="math inline">\(n_1\)</span> random variables whereas <span
+class="math inline">\(S_2\)</span> denotes the random mean over all
+random variables:</p></li>
+</ol>
+<p><span class="math display">\[S_1 =
+\frac{1}{n_1}\sum_{i=1}^{n_1}X_i,\]</span> <span
+class="math display">\[S_2 = \frac{1}{n_1 + m}\sum_{i=1}^{n_1 + m}
+X_i.\]</span> Assume that the expectation of <span
+class="math inline">\(X_1\)</span> is <span
+class="math inline">\(\mu\)</span> and the variance is <span
+class="math inline">\(\sigma^2\)</span>: <span
+class="math display">\[\mathbb{E}[X_1] = \mu\]</span> <span
+class="math display">\[Var[X_1] = \sigma^2\]</span> (a) Show that <span
+class="math display">\[\mathbb{E}[S_1] = \mathbb{E}[S_2] =
+\mu\]</span></p>
 </div>
 
 
