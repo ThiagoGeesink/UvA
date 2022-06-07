@@ -1,0 +1,302 @@
+---
+title: "Lectures"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 1
+    #code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
+```
+
+# Reading Datasets
+
+```{r}
+Data = read.table("telecom.txt", 
+                  header = TRUE, 
+                  sep = ",")
+Data
+```
+
+# Missing Values
+## Scanning for Missing Values
+
+```{r}
+is.na(Data$MonthlyCharges)
+which(is.na(Data$MonthlyCharges))
+```
+
+## Replace Alternative Indicators for Missing Values By NA
+
+```{r}
+Data = read.table("telecom.txt", 
+                  header = TRUE, 
+                  sep = ",", 
+                  na.strings = c("na", "N/A", "NA"))
+Data
+```
+# How to handle missing values
+## Method 1
+Remove the missing values from the data.
+- Pro: The remaining data set is not transformed.
+- Con: If there are many missing values, the remaining data set has a significantly smaller size, which affects the reliability of future estimates.
+
+We test the effect of removing missing values from the data set by creating a toy example with simulated data.
+
+### Create The Original Dataset
+```{r}
+Data = rnorm(1000, 
+             mean=100, 
+             sd=25)
+mean(Data)
+```
+### Create A Data Set With 200 Missing Values
+```{r}
+Data.missing = Data
+Data.missing[sample(1000,200)]=NA
+summary(Data.missing)
+```
+### create a new data set by removing the missing values
+```{r}
+Data.Remove = Data.missing[- which(is.na(Data.missing))]
+summary(Data.Remove)
+```
+
+## Method 2
+Drawback of method 2: The variance of the ‘cleaned’ data set is smaller than the original variance.
+Smaller variance for a variable = the variable is ‘more predictable’.
+The effect is more pronounced when there are many missing values.
+
+### Replace the missing values by the empirical mean
+```{r}
+Data.Replace = replace(Data.missing, 
+                       which(is.na(Data.missing)), 
+                       mean(Data.missing[- which(is.na(Data.missing))]))
+```
+### Compare the standard deviations
+```{r}
+sd(Data)
+sd(Data.Replace)
+```
+## Method 3
+The standard deviation of X is not affected a lot.
+However: We changed values in the X variable, indepedently from the Y variable.
+### Create a data set with 2 variables: X and Y.
+```{r}
+set.seed(100)
+x = rnorm(1000, 
+          mean = 100,
+          sd = 25)
+y = (5+rnorm(1000,0,0.2))*x + rnorm(1000,0,1)
+Data = matrix(c(x,y),
+              1000,
+              2)
+```
+### The first variable (X) is containing missing values.
+```{r}
+Data.missing = Data
+Data.missing[sample(1000,200),1] = NA
+```
+### Replace missing values by a randomly generated number from the available X values.
+```{r}
+Values.x = Data.missing[- which(is.na(Data.missing[,1])),1]
+Data.Replace.x = replace(Data.missing[,1],
+                         is.na(Data.missing[,1]),
+                         sample(Values.x,200))
+sd(Data.Replace.x)
+sd(Data[,1])
+```
+
+## Conclusions
+Method 1 + 2 work will if the number of missing values is small, compared to the sample size.
+If there are many missing values, removing or replacing them can have significant impact on your results!
+Replacing values in one variables may cause inconsistencies with the remaining variables.
+
+# Outliers
+## Visualizing patterns in data
+### Draw a histogram in R and add the normal density
+```{r}
+Data = rnorm(500)
+hist(Data,
+     50, 
+     freq=FALSE,
+     main= "Histogram and the standard normal density")
+lines(seq(-4,4,0.1), 
+      dnorm(seq(-4,4,0.1)),
+      col="blue", lwd=2)
+```
+
+### Extreme Points
+Observations that do not follow the pattern of the majority of the data.
+
+### In data science, we are looking for (new and surprising) patterns in the data.
+Extreme points can severely influence the patterns that can be found in the data.
+
+### The data pre-processing part has to
+1. identify the extreme points in the data set,
+2. determine a strategy on how to handle extreme points.
+
+## Finding extreme observations: Example 1
+```{r}
+boxplot(Data)
+hist(Data)
+```
+
+### The outlier could be detected by studying the histogram.
+- A histogram shows one variable (e.g. x or y).
+- A histogram can detect an observation that deviates in one direction.
+### In two (or more) dimensions, a scatterplot can be used to reveal patterns between variables.
+
+# Basic Linear Regression
+## Outliers and high-leverage points
+### Extreme points
+- Outlier: unusual observations in the y direction.
+- High leverage point: unusual observation in the x direction.
+### What should we do with outliers and high leverage points?
+- Investigate the sensitivity of the model on the extreme observations;
+- Decide to leave the outlier in the data set; 1. the observation actually happened; 2. and provides important information for the predictions;
+- or remove the outlier from the data set: 1. the outlier is a wrong observation; 2. the outlier is not important for our particular study.
+
+### Creating a data set with outliers and leverage points:
+```{r}
+x1=c(1.5, 1.7, 2, 2.2,2.5,2.5,2.7,2.9,3.0, 3.5,
+    3.8,4.2,4.3,4.6, 4, 5.1,5.1,5.2,5.5)
+y1=c(3,2.5, 3.5, 3.0, 3.1, 3.6, 3.2, 3.9, 4, 4,
+    4.2, 4.1, 4.8, 4.2, 5.1, 5.1, 5.1, 4.8,5.3)
+Ax=c(3.4)
+Ay=c(8)
+Bx=c(9.5)
+By=c(8)
+Cx=c(9.5)
+Cy=(2.5)
+
+plot(c(Ax,Bx,Cx), c(Ay,By,Cy),xlim=c(0,10),ylim=c(0,10), xlab="x-values", ylab="y-values")
+text(c(Ax,Bx,Cx), c(Ay,By,Cy)-0.5, c("A","B","C"))
+points(x1,y1)
+```
+
+### The data set
+- 19 basis points;
+- outlier: A;
+- high leverage point C;
+- outlier & high leverage point: B.
+
+### We apply linear regression model in 3 different situations:
+- only the 19 basis points;
+- the 19 basis points + the outlier A;
+- the 19 + basis points + outlier/high leverage point B.
+- the 19 basis points + the high leverage point C
+
+```{r}
+Outliers.full.lm=lm(y~x)
+summary(Outliers.full.lm)
+Outliers.basis.lm=lm(y1~x1)
+summary(Outliers.basis.lm)
+Outliers.A.lm=lm(c(y1,Ay)~c(x1,Ax))
+summary(Outliers.A.lm)
+Outliers.B.lm=lm(c(y1,By)~c(x1,Bx))
+summary(Outliers.B.lm)
+Outliers.C.lm=lm(c(y1,Cy)~c(x1,Cx))
+summary(Outliers.C.lm)
+
+plot(c(Ax,Bx,Cx), c(Ay,By,Cy),xlim=c(-2,10),ylim=c(-2,10), xlab="x-values", ylab="y-values")
+text(c(Ax,Bx,Cx), c(Ay,By,Cy)-0.3, c("A","B","C"))
+points(x1,y1)
+abline(Outliers.basis.lm,col="red",lwd=2)
+abline(Outliers.A.lm,col="blue",lwd=2)
+abline(Outliers.B.lm,col="black",lwd=2)
+abline(Outliers.C.lm,col="green",lwd=2)
+legend("bottomright", c("19 basis points", " with A", "with B", "with C"), col=c("red", "blue", "black", "green"), lty=c(1,1,1,1))
+
+```
+# Summarizing a Data Set
+## Measures for the location of a data set: normal and lognormal distribution
+```{r}
+par(mfrow=c(1,2))
+X.Normal=rnorm(1000)
+hist(X.Normal,30, main="Normal distribution", xlab="x")
+abline(v=quantile(X.Normal,0.25), col="red", lwd=2)
+abline(v=quantile(X.Normal,0.75), col="red", lwd=2)
+abline(v=mean(X.Normal), col="blue", lwd=2)
+
+X.LogNormal=exp(rnorm(1000))
+hist(X.LogNormal,30, main="Lognormal distribution", xlab="x")
+abline(v=quantile(X.LogNormal,0.25), col="red", lwd=2)
+abline(v=quantile(X.LogNormal,0.75), col="red", lwd=2)
+abline(v=mean(X.LogNormal), col="blue", lwd=2)
+```
+
+## Measures for the center and spread of a data set: Example car data set
+### Load the Data
+```{r}
+dtData = readRDS('dtData1.rds')
+head(dtData)
+summary(dtData)
+```
+
+- Each line corresponds with a policyholder in a car insurance portfolio.
+- The last column Claims contains the number of claims of a
+policyholder.
+- Expo is the exposure, which is the time interval in which we measure the number of claims.
+### This data set can be used to understand the characteristics of a policyholder that may influence the number of claims.
+
+### The summary provides an overview about the center and the spread of the variables in the data set.
+- For variables such as Region and Color, the summary is not meaningful since these are qualitative variables.
+- The variable Claims is a quantitative variable, but the summary is not useful because the data is discrete.
+
+```{r}
+library(ggplot2)
+P = ggplot(data = dtData, mapping = (aes(x = Mileage)))
+P
+```
+
+- We created the Base layer for the plot.
+- We have to add layers to this base layer where each layer adds
+something to the plot.
+```{r}
+P+geom_histogram(bins=20, color="black",fill="grey")
+P+geom_histogram(bins=20, color="black",fill="grey")+
+       geom_vline(aes(xintercept=mean(Mileage)),
+                 color="blue", linetype="dashed", size=1) +
+       geom_vline(aes(xintercept=quantile(Mileage, 0.25)),
+                  color="red", linetype="dashed", size=1) +
+       geom_vline(aes(xintercept=quantile(Mileage, 0.75)),
+                  color="red", linetype="dashed", size=1) + 
+  ggtitle("Histogram of the variable Mileage")
+```
+
+# Data Transformation
+## Rescaling and normalization: Illustration with clusters
+### Example: Clusters with non-normalized data
+```{r}
+X1=c(rnorm(50,50,100), rnorm(50,200,100))
+X2=c(rnorm(50,0.1,0.1), rnorm(50, 0.8,0.1))
+par(mfrow=c(1,2))
+plot(X1,X2, pch=20,lwd=5,col="blue", main="Data set (non-standardized)")
+Data=matrix(c(X1,X2),ncol = 2, byrow = FALSE)
+fit <- kmeans(Data, 2)
+fit
+plot(X1,X2,col=(1+fit$cluster), pch=20,lwd=5, main = "Results after cluster analysis")
+
+```
+
+### standardize with Z scores
+```{r}
+X1.Z=(X1-mean(X1))/sd(X1)
+X2.Z=(X2-mean(X2))/sd(X2)
+plot(X1.Z, X2.Z, pch=20,lwd=5,col="blue", main="Data set (standardized)")
+Data=matrix(c(X1.Z,X2.Z),ncol = 2, byrow = FALSE)
+fit <- kmeans(Data, 2)
+fit
+plot(X1.Z,X2.Z,col=(1+fit$cluster), pch=20,lwd=5,main = "Results after cluster analysis")
+```
+
+
+
+
+
