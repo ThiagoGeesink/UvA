@@ -359,7 +359,7 @@ Indicator also if it is a discrete or a continuous variable.</p></li>
 <li><p>Explain why zip codes should be considered text variables rather
 than numeric.</p></li>
 <li><p>Consider a data set <span class="math inline">\(X_1, X_2,
-\dots,X_30\)</span> with 30 observations. Assume that each observation
+\dots,X_{30}\)</span> with 30 observations. Assume that each observation
 can be missing and assume that the probability that an observation is
 missing is 0.05. Moreover, missing values are spread evenly through the
 data and occur independently of each other. Denote by <span
@@ -386,8 +386,28 @@ class="math inline">\(\mu\)</span> and the variance is <span
 class="math inline">\(\sigma^2\)</span>: <span
 class="math display">\[\mathbb{E}[X_1] = \mu\]</span> <span
 class="math display">\[Var[X_1] = \sigma^2\]</span> (a) Show that <span
-class="math display">\[\mathbb{E}[S_1] = \mathbb{E}[S_2] =
-\mu\]</span></p>
+class="math display">\[\mathbb{E}[S_1] = \mathbb{E}[S_2] = \mu\]</span>
+(b) Show that <span class="math display">\[\frac{Var[S_1]}{Var[S_2]} = 1
++ \frac{m}{n_1}\]</span> (c) Assume the <span
+class="math inline">\(X_i\)</span> is the <span
+class="math inline">\(i\)</span>-th observation in our data set.
+Moreover, assume that the last <span class="math inline">\(m\)</span>
+observations have to be deleted because of missing values. Give an
+interpretation of the results in Question a and b</p>
+<ol start="5" style="list-style-type: decimal">
+<li>Consider the following R code. What is the output after running this
+code?</li>
+</ol>
+<pre class="r"><code>Data = data.frame(c(100,NA,90,75,110,132), c(NA,1,5,0.5,NA, &quot;na&quot;))
+names(Data) = c(&quot;Variable 1&quot;, &quot;Variable 2&quot;)
+sum(is.na(Data))</code></pre>
+<pre><code>## [1] 3</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>Consider the following R code which is used to handle missing
+values, where Data is a vector with observations.</li>
+</ol>
+<pre class="r"><code>sum(is.na(Data))
+Data.New = replace(Data,which(is.na(Data)), mean(Data))</code></pre>
 </div>
 
 

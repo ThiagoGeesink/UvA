@@ -33,3 +33,17 @@ $$\mathbb{E}[S_1] = \mathbb{E}[S_2] = \mu$$
 (b) Show that
 $$\frac{Var[S_1]}{Var[S_2]} = 1 + \frac{m}{n_1}$$
 (c) Assume the $X_i$ is the $i$-th observation in our data set. Moreover, assume that the last $m$ observations have to be deleted because of missing values. Give an interpretation of the results in Question a and b
+
+5. Consider the following R code. What is the output after running this code?
+```{r}
+Data = data.frame(c(100,NA,90,75,110,132), c(NA,1,5,0.5,NA, "na"))
+names(Data) = c("Variable 1", "Variable 2")
+sum(is.na(Data))
+```
+
+6. Consider the following R code which is used to handle missing values, where Data is a vector with observations.
+```{r, eval=FALSE}
+sum(is.na(Data))
+Data.New = replace(Data,which(is.na(Data)), mean(Data))
+```
+
