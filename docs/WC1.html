@@ -425,6 +425,35 @@ mean(Data.remove)</code></pre>
 <pre><code>## [1] 100.5461</code></pre>
 <pre class="r"><code>sd(Data.remove)</code></pre>
 <pre><code>## [1] 24.99862</code></pre>
+<pre class="r"><code>par(mfrow = c(1,2))
+hist(Data,100)
+hist(Data.remove,100)</code></pre>
+<p><img src="WC1_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<pre class="r"><code>empirical.mean = c()
+for( i in 1:500){
+  Data.missing=replace(Data,sample(1000,i),NA)
+  Data.remove=Data.missing[- which(is.na(Data.missing))]
+  empirical.mean[i]=mean(Data.remove)
+}
+plot(empirical.mean, xlab=&quot;Number of missing values&quot;, ylab = &quot;Mean of the new data set&quot;, main=&quot;Mean of the data set after removing the missing values&quot;, pch=20, lwd=2, col=&quot;blue&quot;)</code></pre>
+<p><img src="WC1_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="method-2" class="section level3">
+<h3>Method 2</h3>
+<pre class="r"><code>Data.missing=replace(Data, sample(1000, i), NA)
+Data.replace=replace(Data.missing, which(is.na(Data.missing)), mean(Data.missing[- which(is.na(Data.missing))]))
+sd(Data)</code></pre>
+<pre><code>## [1] 25.7647</code></pre>
+<pre class="r"><code>sd(Data.replace)</code></pre>
+<pre><code>## [1] 18.59522</code></pre>
+<pre class="r"><code>empirical.sd=c()
+for( i in 1:700){
+  Data.missing=replace(Data,sample(1000,i),NA)
+  Data.replace=replace(Data.missing,which(is.na(Data.missing)), mean(Data.missing[- which(is.na(Data.missing))]))
+  empirical.sd[i]=sd(Data.replace)
+}
+plot(empirical.sd, xlab=&quot;Number of missing values&quot;, ylab = &quot;sd of the new data set&quot;, main=&quot;sd of the data set after replacing the missing values by the mean&quot;, pch=20, lwd=2, col=&quot;blue&quot;)</code></pre>
+<p><img src="WC1_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 </div>
 </div>

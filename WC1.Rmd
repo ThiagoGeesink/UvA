@@ -61,5 +61,40 @@ mean(Data.remove)
 sd(Data.remove)
 ```
 
+```{r}
+par(mfrow = c(1,2))
+hist(Data,100)
+hist(Data.remove,100)
+```
 
+```{r}
+empirical.mean = c()
+for( i in 1:500){
+  Data.missing=replace(Data,sample(1000,i),NA)
+  Data.remove=Data.missing[- which(is.na(Data.missing))]
+  empirical.mean[i]=mean(Data.remove)
+}
+plot(empirical.mean, xlab="Number of missing values", ylab = "Mean of the new data set", main="Mean of the data set after removing the missing values", pch=20, lwd=2, col="blue")
+
+
+```
+
+### Method 2
+```{r}
+Data.missing=replace(Data, sample(1000, i), NA)
+Data.replace=replace(Data.missing, which(is.na(Data.missing)), mean(Data.missing[- which(is.na(Data.missing))]))
+sd(Data)
+sd(Data.replace)
+```
+
+```{r}
+empirical.sd=c()
+for( i in 1:700){
+  Data.missing=replace(Data,sample(1000,i),NA)
+  Data.replace=replace(Data.missing,which(is.na(Data.missing)), mean(Data.missing[- which(is.na(Data.missing))]))
+  empirical.sd[i]=sd(Data.replace)
+}
+plot(empirical.sd, xlab="Number of missing values", ylab = "sd of the new data set", main="sd of the data set after replacing the missing values by the mean", pch=20, lwd=2, col="blue")
+
+```
 
