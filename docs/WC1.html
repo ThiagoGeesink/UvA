@@ -375,8 +375,8 @@ Data</code></pre>
 <pre><code>##  [1] &quot;109.9&quot;   &quot;na&quot;      &quot;108.15&quot;  &quot;1840.75&quot; NA        &quot;820.5&quot;   &quot;1949.4&quot; 
 ##  [8] &quot;N/A&quot;     &quot;3046.05&quot; &quot;354.95&quot;</code></pre>
 </div>
-<div id="na-values" class="section level2">
-<h2>NA values</h2>
+<div id="non-available-values" class="section level2">
+<h2>Non Available values</h2>
 <pre class="r"><code>Data$TotalCharges</code></pre>
 <pre><code>##  [1] &quot;109.9&quot;   &quot;na&quot;      &quot;108.15&quot;  &quot;1840.75&quot; NA        &quot;820.5&quot;   &quot;1949.4&quot; 
 ##  [8] &quot;N/A&quot;     &quot;3046.05&quot; &quot;354.95&quot;</code></pre>
@@ -403,6 +403,28 @@ Data</code></pre>
 ## 10 8451-AJOMK          54.10       354.95 Electronic check    no</code></pre>
 <pre class="r"><code>sum(is.na(Data$TotalCharges))</code></pre>
 <pre><code>## [1] 3</code></pre>
+</div>
+<div id="method-1-of-handling-na-values" class="section level3">
+<h3>Method 1 of handling NA values</h3>
+<p>We will try to understand the method using generated data.</p>
+<pre class="r"><code>rm(list = ls())
+set.seed(100)
+Data = rnorm(1000, mean = 100, sd = 25)
+head(Data)</code></pre>
+<pre><code>## [1]  87.44519 103.28828  98.02707 122.16962 102.92428 107.96575</code></pre>
+<pre class="r"><code>summary(Data)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   16.98   83.76  100.92  100.42  117.74  182.60</code></pre>
+<pre class="r"><code>Data.missing = Data
+Data.missing[sample(1000,200)]=NA
+mean(Data.missing)</code></pre>
+<pre><code>## [1] NA</code></pre>
+<p>We remove the NA’s from the dataset</p>
+<pre class="r"><code>Data.remove = Data.missing[- which(is.na(Data.missing))]
+mean(Data.remove)</code></pre>
+<pre><code>## [1] 100.5461</code></pre>
+<pre class="r"><code>sd(Data.remove)</code></pre>
+<pre><code>## [1] 24.99862</code></pre>
 </div>
 </div>
 </div>

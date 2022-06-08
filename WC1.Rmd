@@ -26,7 +26,7 @@ Data
 Data$TotalCharges
 ```
 
-## NA values
+## Non Available values
 ```{r}
 Data$TotalCharges
 is.na(Data$TotalCharges)
@@ -40,4 +40,26 @@ Data = read.table("telecom.txt", header = TRUE, sep = ",", na.strings = c("na", 
 Data
 sum(is.na(Data$TotalCharges))
 ```
+
+### Method 1 of handling NA values
+We will try to understand the method using generated data.
+```{r}
+rm(list = ls())
+set.seed(100)
+Data = rnorm(1000, mean = 100, sd = 25)
+head(Data)
+summary(Data)
+Data.missing = Data
+Data.missing[sample(1000,200)]=NA
+mean(Data.missing)
+```
+
+We remove the NA's from the dataset
+```{r}
+Data.remove = Data.missing[- which(is.na(Data.missing))]
+mean(Data.remove)
+sd(Data.remove)
+```
+
+
 
