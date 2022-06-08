@@ -1,0 +1,27 @@
+---
+title: "Working Classes"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 1
+    #code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
+```
+# WC 1
+## Read data
+```{r}
+rm(list = ls())
+Data = read.table("telecom.txt", header = TRUE, sep = ",")
+Data
+```
+## Read a specific column
+```{r}
+Data$TotalCharges
+```
+

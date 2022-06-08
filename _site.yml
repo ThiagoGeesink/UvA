@@ -4,8 +4,10 @@ navbar:
   left:
     - text: "Home"
       href: index.html
-    - text: "Exercises"
-      href: Exercises.html
     - text: "Lectures"
       href: Lectures.html
+    - text: "Working Classes"
+      href: WC1.html
+    - text: "Exercises"
+      href: Exercises.html
 output_dir: "docs"

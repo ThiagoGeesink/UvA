@@ -11,7 +11,7 @@
 
 
 
-<title>UvA</title>
+<title>Working Classes</title>
 
 <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -29,6 +29,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -222,6 +225,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -229,6 +295,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -269,30 +345,42 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">UvA</h1>
+<h1 class="title toc-ignore">Working Classes</h1>
 
 </div>
 
 
-<style type="text/css">
-.title {
-  display: none;
-}
-
-#getting-started img {
-  margin-right: 10px;
-}
-
-</style>
-<div class="row" style="padding-top: 30px;">
-<div class="col-sm-6">
-
-<div id="my-lab-journal" class="section level1">
-<h1><strong>My Lab Journal</strong></h1>
+<div id="wc-1" class="section level1">
+<h1>WC 1</h1>
+<div id="read-data" class="section level2">
+<h2>Read data</h2>
+<pre class="r"><code>rm(list = ls())
+Data = read.table(&quot;telecom.txt&quot;, header = TRUE, sep = &quot;,&quot;)
+Data</code></pre>
+<pre><code>##    customerID MonthlyCharges TotalCharges    PaymentMethod Churn
+## 1  7590-VHVEG          29.85        109.9 Electronic check   yes
+## 2  5575-GNVDE          56.95           na     Mailed check   yes
+## 3  3668-QPYBK             NA       108.15               --   yes
+## 4  7795-CFOCW          42.30      1840.75    Bank transfer    no
+## 5  9237-HQITU          70.70         &lt;NA&gt; Electronic check    no
+## 6  9305-CDSKC            NaN        820.5               --   yes
+## 7  1452-KIOVK          89.10       1949.4      Credit card    no
+## 8  6713-OKOMC             NA          N/A                    yes
+## 9  7892-POOKP         104.80      3046.05 Electronic check    no
+## 10 8451-AJOMK          54.10       354.95 Electronic check    no</code></pre>
+</div>
+<div id="read-a-specific-column" class="section level2">
+<h2>Read a specific column</h2>
+<pre class="r"><code>Data$TotalCharges</code></pre>
+<pre><code>##  [1] &quot;109.9&quot;   &quot;na&quot;      &quot;108.15&quot;  &quot;1840.75&quot; NA        &quot;820.5&quot;   &quot;1949.4&quot; 
+##  [8] &quot;N/A&quot;     &quot;3046.05&quot; &quot;354.95&quot;</code></pre>
+</div>
 </div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -325,6 +413,35 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
