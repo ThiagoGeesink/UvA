@@ -20,8 +20,24 @@ rm(list = ls())
 Data = read.table("telecom.txt", header = TRUE, sep = ",")
 Data
 ```
+
 ## Read a specific column
 ```{r}
 Data$TotalCharges
+```
+
+## NA values
+```{r}
+Data$TotalCharges
+is.na(Data$TotalCharges)
+which(is.na(Data$TotalCharges))
+sum(is.na(Data$TotalCharges))
+```
+
+### Changing different NA values
+```{r}
+Data = read.table("telecom.txt", header = TRUE, sep = ",", na.strings = c("na", "N/A", "NaN","NA"))
+Data
+sum(is.na(Data$TotalCharges))
 ```
 

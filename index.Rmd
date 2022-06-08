@@ -1,5 +1,5 @@
 ---
-title: "UvA"
+title: "Home"
 output: html_document
 ---
 

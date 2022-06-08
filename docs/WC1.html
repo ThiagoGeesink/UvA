@@ -317,7 +317,7 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">UvA</a>
+      <a class="navbar-brand" href="index.html">Thiago Geesink</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -374,6 +374,36 @@ Data</code></pre>
 <pre class="r"><code>Data$TotalCharges</code></pre>
 <pre><code>##  [1] &quot;109.9&quot;   &quot;na&quot;      &quot;108.15&quot;  &quot;1840.75&quot; NA        &quot;820.5&quot;   &quot;1949.4&quot; 
 ##  [8] &quot;N/A&quot;     &quot;3046.05&quot; &quot;354.95&quot;</code></pre>
+</div>
+<div id="na-values" class="section level2">
+<h2>NA values</h2>
+<pre class="r"><code>Data$TotalCharges</code></pre>
+<pre><code>##  [1] &quot;109.9&quot;   &quot;na&quot;      &quot;108.15&quot;  &quot;1840.75&quot; NA        &quot;820.5&quot;   &quot;1949.4&quot; 
+##  [8] &quot;N/A&quot;     &quot;3046.05&quot; &quot;354.95&quot;</code></pre>
+<pre class="r"><code>is.na(Data$TotalCharges)</code></pre>
+<pre><code>##  [1] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE</code></pre>
+<pre class="r"><code>which(is.na(Data$TotalCharges))</code></pre>
+<pre><code>## [1] 5</code></pre>
+<pre class="r"><code>sum(is.na(Data$TotalCharges))</code></pre>
+<pre><code>## [1] 1</code></pre>
+<div id="changing-different-na-values" class="section level3">
+<h3>Changing different NA values</h3>
+<pre class="r"><code>Data = read.table(&quot;telecom.txt&quot;, header = TRUE, sep = &quot;,&quot;, na.strings = c(&quot;na&quot;, &quot;N/A&quot;, &quot;NaN&quot;,&quot;NA&quot;))
+Data</code></pre>
+<pre><code>##    customerID MonthlyCharges TotalCharges    PaymentMethod Churn
+## 1  7590-VHVEG          29.85       109.90 Electronic check   yes
+## 2  5575-GNVDE          56.95           NA     Mailed check   yes
+## 3  3668-QPYBK             NA       108.15               --   yes
+## 4  7795-CFOCW          42.30      1840.75    Bank transfer    no
+## 5  9237-HQITU          70.70           NA Electronic check    no
+## 6  9305-CDSKC            NaN       820.50               --   yes
+## 7  1452-KIOVK          89.10      1949.40      Credit card    no
+## 8  6713-OKOMC             NA           NA                    yes
+## 9  7892-POOKP         104.80      3046.05 Electronic check    no
+## 10 8451-AJOMK          54.10       354.95 Electronic check    no</code></pre>
+<pre class="r"><code>sum(is.na(Data$TotalCharges))</code></pre>
+<pre><code>## [1] 3</code></pre>
+</div>
 </div>
 </div>
 

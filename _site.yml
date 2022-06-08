@@ -1,6 +1,6 @@
-name: "UvA"
+name: "Thiago Geesink"
 navbar:
-  title: "UvA"
+  title: "Thiago Geesink"
   left:
     - text: "Home"
       href: index.html
