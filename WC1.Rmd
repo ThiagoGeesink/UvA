@@ -97,4 +97,4 @@ for( i in 1:700){
 plot(empirical.sd, xlab="Number of missing values", ylab = "sd of the new data set", main="sd of the data set after replacing the missing values by the mean", pch=20, lwd=2, col="blue")
 
 ```
-
+### Method 3
