@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Exercises</title>
+
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Thiago Geesink</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="Lectures.html">Lectures</a>
+</li>
+<li>
+  <a href="WC1.html">Working Classes</a>
+</li>
+<li>
+  <a href="Exercises.html">Exercises</a>
+</li>
+<li>
+  <a href="Assignments.html">Assignments</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Exercises</h1>
+
+</div>
+
+
+<div id="assignment-1" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Assignment 1</h1>
+<div id="question-1" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Question 1</h2>
+<div
+id="use-ggplot-to-make-a-histogram-and-a-boxplot-of-the-variable-x.n.-the-grid.extra-package-contains-the-grid.arrange-function-which-is-convenient-to-organize-multiple-plots."
+class="section level3" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> 1 Use ggplot to
+make a histogram and a boxplot of the variable x.n. The grid.Extra
+package contains the grid.arrange function which is convenient to
+organize multiple plots.</h3>
+<pre class="r"><code>set.seed(100)
+Data=data.frame(x.n=rnorm(50000),x.p=rPareto(50000,t=1,alpha=2))
+summary(Data)</code></pre>
+<pre><code>##       x.n                 x.p         
+##  Min.   :-4.087893   Min.   :  1.000  
+##  1st Qu.:-0.671144   1st Qu.:  1.154  
+##  Median :-0.005919   Median :  1.412  
+##  Mean   :-0.000208   Mean   :  1.994  
+##  3rd Qu.: 0.672466   3rd Qu.:  1.992  
+##  Max.   : 4.363243   Max.   :159.275</code></pre>
+<pre class="r"><code>P = ggplot(data = Data, mapping = (aes(x.n)))
+
+p1 = P + geom_histogram(bins=20, color=&quot;black&quot;,fill=&quot;grey&quot;) +
+  geom_vline(aes(xintercept=mean(x.n)),
+             color=&quot;blue&quot;, size=1) +
+  geom_vline(aes(xintercept=median(x.n)),
+             color=&quot;red&quot;, linetype=&quot;dashed&quot;, size=1)
+p2 = P + geom_boxplot()
+grid.arrange(p1, p2, nrow = 2)</code></pre>
+<p><img src="Assignments_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div
+id="determine-the-sample-mean-and-sample-standard-deviation-of-the-variable-x.n.-is-this-what-you-would-expect-given-the-data-generation-process"
+class="section level3" number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> 2 Determine the
+sample mean and sample standard deviation of the variable x.n. Is this
+what you would expect given the data generation process?</h3>
+<pre class="r"><code>describe(Data$x.n)</code></pre>
+<pre><code>## Data$x.n 
+##          n    missing   distinct       Info       Mean        Gmd        .05 
+##      50000          0      50000          1 -0.0002085      1.127  -1.635097 
+##        .10        .25        .50        .75        .90        .95 
+##  -1.272684  -0.671144  -0.005919   0.672466   1.285326   1.653768 
+## 
+## lowest : -4.087893 -4.036810 -3.964171 -3.663576 -3.518848
+## highest:  3.813002  3.888043  3.979364  4.007258  4.363243</code></pre>
+<pre class="r"><code>sd(Data$x.n)</code></pre>
+<pre><code>## [1] 0.9989658</code></pre>
+<p>Since the data is generated using ‘rnorm’ function with a mean 0 and
+standard deviation 1. We would expect a mean around 0 and a standard
+deviation around 1.</p>
+</div>
+<div
+id="explain-how-the-sample-mean-and-standard-deviation-that-you-calculated-in-the-previous-question-can-be-used-to-summarize-the-variable.-in-particular-can-the-mean-be-used-to-predict-new-observations"
+class="section level3" number="1.1.3">
+<h3><span class="header-section-number">1.1.3</span> 3 Explain how the
+sample mean and standard deviation that you calculated in the previous
+question can be used to summarize the variable. In particular, can the
+mean be used to predict new observations?</h3>
+<p>The mean defines the location of the peak for the normal
+distribution. Most values cluster around the mean.</p>
+<p>Standard deviation measures the spread of a data distribution. It
+measures the typical distance between each data point and the mean.</p>
+<p>For a normal distribution, 68% of the observations are within +/- one
+standard deviation of the mean, 95% are within +/- two standard
+deviations, and 99.7% are within +- three standard deviations.</p>
+</div>
+<div
+id="consider-the-following-statement-the-mean-and-the-standard-deviation-of-the-observations-of-the-variable-x.p-cannot-be-used-to-summarize-the-data.-moreover-the-mean-is-a-bad-predictor-for-new-observations-because-it-neglects-possible-very-extreme-realizations.-provide-an-analysis-to-support-this-statement.-make-useful-plots-and-tables."
+class="section level3" number="1.1.4">
+<h3><span class="header-section-number">1.1.4</span> 4 Consider the
+following statement: ‘The mean and the standard deviation of the
+observations of the variable x.p cannot be used to summarize the data.
+Moreover, the mean is a bad predictor for new observations because it
+neglects possible very extreme realizations.’ Provide an analysis to
+support this statement. Make useful plots and tables.</h3>
+<p>Tip: Start by determining the mean and standard deviation of the data
+set. Make a histogram and boxplot. You can use the function filter to
+determine a subset of a data frame.</p>
+<pre class="r"><code>describe(Data$x.p)</code></pre>
+<pre><code>## Data$x.p 
+##        n  missing distinct     Info     Mean      Gmd      .05      .10 
+##    50000        0    50000        1    1.994    1.324    1.025    1.053 
+##      .25      .50      .75      .90      .95 
+##    1.154    1.412    1.992    3.159    4.474 
+## 
+## lowest :   1.000006   1.000021   1.000028   1.000029   1.000036
+## highest:  78.040839  89.300194 107.986396 141.555021 159.274526</code></pre>
+<pre class="r"><code>par(mfrow=c(2,2))
+hist(Data$x.p,50)
+hist(log(Data$x.p),50)
+mean(Data$x.p)</code></pre>
+<pre><code>## [1] 1.993904</code></pre>
+<pre class="r"><code>sd(Data$x.p)</code></pre>
+<pre><code>## [1] 2.601173</code></pre>
+<pre class="r"><code>abline(v = mean(log(Data$x.p)), col = &quot;blue&quot;)
+text(2,6000, &quot;Mean = 1.993904&quot;, col = &quot;blue&quot;)
+?abline
+boxplot(Data$x.p, horizontal=TRUE, range=1.5)
+boxplot(log(Data$x.p), horizontal=TRUE, range=1.5)</code></pre>
+<p><img src="Assignments_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>The variable <span class="math inline">\(x.p\)</span> has a large
+tail on the right and has many outliers with some very extreme values.
+Since the mean and the standard deviation are senstive to outliers are
+they less informative for skewed variables like <span
+class="math inline">\(x.p\)</span>.</p>
+<pre class="r"><code>summary(Data$x.p)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   1.000   1.154   1.412   1.994   1.992 159.275</code></pre>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

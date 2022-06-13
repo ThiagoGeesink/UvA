@@ -10,4 +10,6 @@ navbar:
       href: WC1.html
     - text: "Exercises"
       href: Exercises.html
+    - text: "Assignments"
+      href: Assignments.html
 output_dir: "docs"

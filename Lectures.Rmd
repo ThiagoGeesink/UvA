@@ -16,7 +16,6 @@ knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 
 # LECTURE 1
 # Reading Datasets
-
 ```{r}
 Data = read.table("telecom.txt", 
                   header = TRUE, 
@@ -26,14 +25,12 @@ Data
 
 # Missing Values
 ## Scanning for Missing Values
-
 ```{r}
 is.na(Data$MonthlyCharges)
 which(is.na(Data$MonthlyCharges))
 ```
 
 ## Replace Alternative Indicators for Missing Values By NA
-
 ```{r}
 Data = read.table("telecom.txt", 
                   header = TRUE, 
@@ -41,6 +38,7 @@ Data = read.table("telecom.txt",
                   na.strings = c("na", "N/A", "NA"))
 Data
 ```
+
 # How to handle missing values
 ## Method 1
 Remove the missing values from the data.
@@ -56,12 +54,14 @@ Data = rnorm(1000,
              sd=25)
 mean(Data)
 ```
+
 ### Create A Data Set With 200 Missing Values
 ```{r}
 Data.missing = Data
 Data.missing[sample(1000,200)]=NA
 summary(Data.missing)
 ```
+
 ### create a new data set by removing the missing values
 ```{r}
 Data.Remove = Data.missing[- which(is.na(Data.missing))]
@@ -79,11 +79,13 @@ Data.Replace = replace(Data.missing,
                        which(is.na(Data.missing)), 
                        mean(Data.missing[- which(is.na(Data.missing))]))
 ```
+
 ### Compare the standard deviations
 ```{r}
 sd(Data)
 sd(Data.Replace)
 ```
+
 ## Method 3
 The standard deviation of X is not affected a lot.
 However: We changed values in the X variable, indepedently from the Y variable.
@@ -98,11 +100,13 @@ Data = matrix(c(x,y),
               1000,
               2)
 ```
+
 ### The first variable (X) is containing missing values.
 ```{r}
 Data.missing = Data
 Data.missing[sample(1000,200),1] = NA
 ```
+
 ### Replace missing values by a randomly generated number from the available X values.
 ```{r}
 Values.x = Data.missing[- which(is.na(Data.missing[,1])),1]
@@ -118,18 +122,27 @@ Method 1 + 2 work will if the number of missing values is small, compared to the
 If there are many missing values, removing or replacing them can have significant impact on your results!
 Replacing values in one variables may cause inconsistencies with the remaining variables.
 
+# LECTURE 2
 # Outliers
 ## Visualizing patterns in data
 ### Draw a histogram in R and add the normal density
 ```{r}
-Data = rnorm(500)
-hist(Data,
-     50, 
-     freq=FALSE,
-     main= "Histogram and the standard normal density")
-lines(seq(-4,4,0.1), 
-      dnorm(seq(-4,4,0.1)),
-      col="blue", lwd=2)
+par(mfrow=c(2,2))
+Data=rnorm(100000)
+hist(Data,100, freq=FALSE, main= "Histogram and the standard normal density")
+lines(seq(-4,4,0.1), dnorm(seq(-4,4,0.1)), col="blue", lwd=2)
+
+Data=rnorm(5000)
+hist(Data,100, freq=FALSE, main= "Histogram and the standard normal density")
+lines(seq(-4,4,0.1), dnorm(seq(-4,4,0.1)), col="blue", lwd=2)
+
+Data=rnorm(500)
+hist(Data,50, freq=FALSE, main= "Histogram and the standard normal density")
+lines(seq(-4,4,0.1), dnorm(seq(-4,4,0.1)), col="red", lwd=2)
+
+Data=rnorm(5000)+rt(500,5)
+hist(Data,100, freq=FALSE, main= "Histogram and the standard normal density", ylim=c(0,0.4))
+lines(seq(-4,4,0.1), dnorm(seq(-4,4,0.1)), col="red", lwd=2)
 ```
 
 ### Extreme Points
@@ -144,20 +157,39 @@ Extreme points can severely influence the patterns that can be found in the data
 
 ## Finding extreme observations: Example 1
 ```{r}
-boxplot(Data)
-hist(Data)
+par(mfrow=(c(1,2)))
+boxplot(c(rnorm(500), 6), main="Boxplot")
+hist(c(rnorm(500), 6),50, main="Histogram")
 ```
 
 ### The outlier could be detected by studying the histogram.
 - A histogram shows one variable (e.g. x or y).
 - A histogram can detect an observation that deviates in one direction.
+```{r}
+Data=read.table("Outlier.txt",sep=",", header=FALSE)
+
+X=Data$V1
+Y=Data$V2
+
+par(mfrow=c(2,2))
+hist(X,15)
+boxplot(X,main="Boxplot of X")
+hist(Y,15)
+boxplot(Y, main="Boxplot of Y")
+```
+
 ### In two (or more) dimensions, a scatterplot can be used to reveal patterns between variables.
+```{r}
+plot(X,Y, main="Scatterplot of the data", pch=20, col="blue", lwd=2)
+```
+
 
 # Basic Linear Regression
 ## Outliers and high-leverage points
 ### Extreme points
 - Outlier: unusual observations in the y direction.
 - High leverage point: unusual observation in the x direction.
+
 ### What should we do with outliers and high leverage points?
 - Investigate the sensitivity of the model on the extreme observations;
 - Decide to leave the outlier in the data set; 1. the observation actually happened; 2. and provides important information for the predictions;
@@ -215,6 +247,7 @@ abline(Outliers.C.lm,col="green",lwd=2)
 legend("bottomright", c("19 basis points", " with A", "with B", "with C"), col=c("red", "blue", "black", "green"), lty=c(1,1,1,1))
 
 ```
+
 # Summarizing a Data Set
 ## Measures for the location of a data set: normal and lognormal distribution
 ```{r}
@@ -252,8 +285,18 @@ policyholder.
 
 ```{r}
 library(ggplot2)
-P = ggplot(data = dtData, mapping = (aes(x = Mileage)))
-P
+P=ggplot(data=dtData, mapping=(aes(x=Mileage)))
+P # This shows the base plot, we still have to specify what should be plotted. For example, a histogram.
+P+geom_histogram(bins=20, color="black",fill="grey")
+# add a dashed line to indicate the mean and the quartiles. 
+P+geom_histogram(bins=20, color="black",fill="grey")+
+  ggtitle("Histogram of the variable Mileage") +
+  geom_vline(aes(xintercept=mean(Mileage)),
+            color="blue", linetype="dashed", size=1) +
+  geom_vline(aes(xintercept=quantile(Mileage, 0.25)),
+             color="red", linetype="dashed", size=1) +
+  geom_vline(aes(xintercept=quantile(Mileage, 0.75)),
+             color="red", linetype="dashed", size=1) 
 ```
 
 - We created the Base layer for the plot.
@@ -297,7 +340,72 @@ fit
 plot(X1.Z,X2.Z,col=(1+fit$cluster), pch=20,lwd=5,main = "Results after cluster analysis")
 ```
 
+### Min-max scaling vs z-scores
+```{r}
+# Transform the data of the Car insurance data set 
+dtData=readRDS('dtData1.rds')
+#Min max scaling
+dtData$MileageMinMax=(dtData$Mileage-min(dtData$Mileage))/(max(dtData$Mileage)-min(dtData$Mileage))
+par(mfrow=c(1,2))
+hist(dtData$Mileage,50, main= "Histogram of Mileage (non-transformed)", ylim=c(0,250))
+hist(dtData$MileageMinMax,50, main= "Histogram of Mileage (Min-Max transformed)", ylim=c(0,250))
+
+# Z scores
+dtData$MileageZ= (dtData$Mileage-mean(dtData$Mileage))/sd(dtData$Mileage)
+mean(dtData$MileageZ)
+sd(dtData$MileageZ)
+par(mfrow=c(1,2))
+hist(dtData$Mileage,50, main= "Histogram of Mileage (non-transformed)", ylim=c(0,250))
+hist(dtData$MileageZ,50, main= "Histogram of Z-scores for Mileage", ylim=c(0,250))
+
+# Achieving normality in the Mileage variable
+par(mfrow=c(1,2))
+hist(dtData$Mileage,50, main= "Histogram of Mileage", ylim=c(0,250))
+hist(log(dtData$Mileage),50, main= "Histogram of log of Mileage", ylim=c(0,250))
+
+# QQ plot
+qqnorm(dtData$Mileage)
+qqline(dtData$Mileage, col = "red")
+qqnorm(log(dtData$Mileage))
+qqline(log(dtData$Mileage), col = "red")
+
+# Detecting outliers
+par(mfrow=c(2,1))
+boxplot(dtData$Mileage,horizontal=TRUE, range=1.5, main ="Boxplot for Mileage")
+boxplot(log(dtData$Mileage),horizontal=TRUE, range=1.5, main = "Boxplot for log of Mileage")
+```
+
+# Exploratory Data Analysis
+```{r}
+churn = read.table("churn.txt", header=TRUE, sep=",")
+dim(churn)
+head(churn)
+```
+
+```{r}
+# summarize the variable Intl.Calls
+library(ggplot2)
+par(mfrow=c(1,2))
+a=ggplot(data=churn)+geom_histogram(aes(x=Intl.Calls), binwidth=1, color="black")
+a
+
+# Summarizing the variable Intl.Plan
+ggplot(data=churn) +geom_bar(aes(x=Intl.Plan))
+
+# comparing churn and Intl.Plan
+# a table for churn
+table(churn$Churn)
+table(churn$Churn)/length(churn$Churn)
+table(churn$Intl.Plan)
+table(churn$Intl.Plan)/length(churn$Intl.Plan)
 
 
+# Relationship between Intl.Plan and churn
 
+library(gridExtra)
+p1=ggplot(data=churn)+geom_bar(aes(x=Intl.Plan, fill=Churn), position = "dodge")+ggtitle("position = dodge")
+p2=ggplot(data=churn)+geom_bar(aes(x=Intl.Plan, fill=Churn), position = "stack")+ggtitle("position = stack")
+p3=ggplot(data=churn)+geom_bar(aes(x=Intl.Plan, fill=Churn), position = "fill")+ggtitle("position = fill")
+grid.arrange(p1, p2,p3, ncol = 3)
+```
 

@@ -1,0 +1,86 @@
+---
+title: "Exercises"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: true
+    toc_depth: 3
+    #code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
+```
+
+# Assignment 1
+## Question 1
+### 1 Use ggplot to make a histogram and a boxplot of the variable x.n. The grid.Extra package contains the grid.arrange function which is convenient to organize multiple plots.
+```{r include=FALSE}
+library(Pareto)
+library(ggplot2)
+library(gridExtra)
+library(Hmisc)
+```
+
+```{r}
+set.seed(100)
+Data=data.frame(x.n=rnorm(50000),x.p=rPareto(50000,t=1,alpha=2))
+summary(Data)
+```
+
+```{r}
+P = ggplot(data = Data, mapping = (aes(x.n)))
+
+p1 = P + geom_histogram(bins=20, color="black",fill="grey") +
+  geom_vline(aes(xintercept=mean(x.n)),
+             color="blue", size=1) +
+  geom_vline(aes(xintercept=median(x.n)),
+             color="red", linetype="dashed", size=1)
+p2 = P + geom_boxplot()
+grid.arrange(p1, p2, nrow = 2)
+```
+
+### 2 Determine the sample mean and sample standard deviation of the variable x.n. Is this what you would expect given the data generation process?
+```{r}
+describe(Data$x.n)
+sd(Data$x.n)
+```
+Since the data is generated using 'rnorm' function with a mean 0 and standard deviation 1. We would expect a mean around 0 and a standard deviation around 1.
+
+### 3 Explain how the sample mean and standard deviation that you calculated in the previous question can be used to summarize the variable. In particular, can the mean be used to predict new observations?
+
+The mean defines the location of the peak for the normal distribution. Most values cluster around the mean.
+
+Standard deviation measures the spread of a data distribution. It measures the typical distance between each data point and the mean.
+
+For a normal distribution, 68% of the observations are within +/- one standard deviation of the mean, 95% are within +/- two standard deviations, and 99.7% are within +- three standard deviations.
+
+### 4 Consider the following statement: ‘The mean and the standard deviation of the observations of the variable x.p cannot be used to summarize the data. Moreover, the mean is a bad predictor for new observations because it neglects possible very extreme realizations.’ Provide an analysis to support this statement. Make useful plots and tables.
+
+Tip: Start by determining the mean and standard deviation of the data set. Make a histogram and boxplot. You can use the function filter to determine a subset of a data frame.
+
+```{r}
+describe(Data$x.p)
+```
+
+```{r}
+par(mfrow=c(2,2))
+hist(Data$x.p,50)
+hist(log(Data$x.p),50)
+mean(Data$x.p)
+sd(Data$x.p)
+abline(v = mean(log(Data$x.p)), col = "blue")
+text(2,6000, "Mean = 1.993904", col = "blue")
+?abline
+boxplot(Data$x.p, horizontal=TRUE, range=1.5)
+boxplot(log(Data$x.p), horizontal=TRUE, range=1.5)
+```
+
+The variable $x.p$ has a large tail on the right and has many outliers with some very extreme values. Since the mean and the standard deviation are senstive to outliers are they less informative for skewed variables like $x.p$.
+```{r}
+summary(Data$x.p)
+
+```
+
