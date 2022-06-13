@@ -1,11 +1,11 @@
 ---
-title: "Exercises"
+title: "Assignments"
 output:
   html_document:
     toc: true
     toc_float: true
     collapsed: false
-    number_sections: true
+    number_sections: false
     toc_depth: 3
     #code_folding: hide
 ---
@@ -13,7 +13,6 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 ```
-
 # Assignment 1
 ## Question 1
 ### 1 Use ggplot to make a histogram and a boxplot of the variable x.n. The grid.Extra package contains the grid.arrange function which is convenient to organize multiple plots.
