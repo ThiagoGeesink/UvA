@@ -1,18 +1,14 @@
 ---
-title: "Assignments"
-output:
-  html_document:
-    toc: true
-    toc_float: true
-    collapsed: false
-    number_sections: false
-    toc_depth: 3
-    #code_folding: hide
+title: "Assignment 1"
+author: "Thiago Geesink (14124165) & Arthur (12345678)"
+date: "`r Sys.Date()`"
+output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
+
 # Assignment 1
 ## Question 1
 ### 1 Use ggplot to make a histogram and a boxplot of the variable x.n. The grid.Extra package contains the grid.arrange function which is convenient to organize multiple plots.
@@ -36,14 +32,8 @@ p1 = P + geom_histogram(bins=20, color="black",fill="grey") +
   geom_vline(aes(xintercept=mean(x.n)),
              color="blue", size=1) +
   geom_vline(aes(xintercept=median(x.n)),
-             color="red", linetype="dashed", size=1) +
-  ggtitle("Histogram of the variable x.n") + 
-  labs(x = "", y = "") + 
-  xlim(-5,5)
-p2 = P + geom_boxplot() +
-  ggtitle("Boxplot of the variable x.n") + 
-  labs(x = "", y = "") +
-  xlim(-5,5)
+             color="red", linetype="dashed", size=1)
+p2 = P + geom_boxplot()
 grid.arrange(p1, p2, nrow = 2)
 ```
 

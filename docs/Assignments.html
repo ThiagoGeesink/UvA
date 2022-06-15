@@ -363,6 +363,10 @@ class="section level3">
 <h3>1 Use ggplot to make a histogram and a boxplot of the variable x.n.
 The grid.Extra package contains the grid.arrange function which is
 convenient to organize multiple plots.</h3>
+<pre class="r"><code>library(Pareto)
+library(ggplot2)
+library(gridExtra)
+library(Hmisc)</code></pre>
 <pre class="r"><code>set.seed(100)
 Data=data.frame(x.n=rnorm(50000),x.p=rPareto(50000,t=1,alpha=2))
 summary(Data)</code></pre>
@@ -379,8 +383,14 @@ p1 = P + geom_histogram(bins=20, color=&quot;black&quot;,fill=&quot;grey&quot;) 
   geom_vline(aes(xintercept=mean(x.n)),
              color=&quot;blue&quot;, size=1) +
   geom_vline(aes(xintercept=median(x.n)),
-             color=&quot;red&quot;, linetype=&quot;dashed&quot;, size=1)
-p2 = P + geom_boxplot()
+             color=&quot;red&quot;, linetype=&quot;dashed&quot;, size=1) +
+  ggtitle(&quot;Histogram of the variable x.n&quot;) + 
+  labs(x = &quot;&quot;, y = &quot;&quot;) + 
+  xlim(-5,5)
+p2 = P + geom_boxplot() +
+  ggtitle(&quot;Boxplot of the variable x.n&quot;) + 
+  labs(x = &quot;&quot;, y = &quot;&quot;) +
+  xlim(-5,5)
 grid.arrange(p1, p2, nrow = 2)</code></pre>
 <p><img src="Assignments_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 </div>
